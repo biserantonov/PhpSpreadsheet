@@ -590,6 +590,11 @@ class Calculation
             'functionCall' => [DateTime::class, 'DAYOFMONTH'],
             'argumentCount' => '1',
         ],
+        'DAYS' => [
+            'category' => Category::CATEGORY_DATE_AND_TIME,
+            'functionCall' => [DateTime::class, 'DAYS'],
+            'argumentCount' => '2',
+        ],
         'DAYS360' => [
             'category' => Category::CATEGORY_DATE_AND_TIME,
             'functionCall' => [DateTime::class, 'DAYS360'],
@@ -1233,6 +1238,11 @@ class Calculation
             'category' => Category::CATEGORY_STATISTICAL,
             'functionCall' => [Statistical::class, 'MAXIF'],
             'argumentCount' => '2+',
+        ],
+        'MAXIFS' => [
+            'category' => Category::CATEGORY_STATISTICAL,
+            'functionCall' => [Statistical::class, 'MAXIFS'],
+            'argumentCount' => '3+',
         ],
         'MDETERM' => [
             'category' => Category::CATEGORY_MATH_AND_TRIG,
