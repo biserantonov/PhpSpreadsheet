@@ -1239,6 +1239,11 @@ class Calculation
             'functionCall' => [Statistical::class, 'MAXIF'],
             'argumentCount' => '2+',
         ],
+        'MAXIFS' => [
+            'category' => Category::CATEGORY_STATISTICAL,
+            'functionCall' => [Statistical::class, 'MAXIFS'],
+            'argumentCount' => '3+',
+        ],
         'MDETERM' => [
             'category' => Category::CATEGORY_MATH_AND_TRIG,
             'functionCall' => [MathTrig::class, 'MDETERM'],

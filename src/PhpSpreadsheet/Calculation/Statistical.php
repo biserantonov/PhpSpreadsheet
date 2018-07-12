@@ -2147,6 +2147,58 @@ class Statistical
     }
 
     /**
+     * MAXIFS.
+     *
+     * Returns the maximum value among cells specified by a given set of conditions or criteria.
+     *
+     * Excel Function:
+     *        MAXIFS(max_range, criteria_range1, criteria1, [criteria_range2, criteria2], ...)
+     *
+     * @see https://support.office.com/en-us/article/maxifs-function-dfd611e6-da2c-488a-919b-9b6376b28883
+     *
+     * @category Statistical Functions
+     *
+     * @param mixed $args Data values and conditions
+     *
+     * @return float
+     */
+    public static function MAXIFS(...$args)
+    {
+        $returnValue = null;
+
+        $maxArgs = Functions::flattenArray(array_shift($args));
+
+        while (count($args) > 0) {
+            $aArgsArray[] = Functions::flattenArray(array_shift($args));
+            $conditions[] = Functions::ifCondition(array_shift($args));
+        }
+
+        // Loop through each set of arguments and conditions
+        foreach ($maxArgs as $key => $maxArg) {
+            $allConditionsAreMet = true;
+
+            foreach ($conditions as $index => $condition) {
+                $arg = isset($aArgsArray[$index][$key]) ? $aArgsArray[$index][$key] : null;
+                if (!is_numeric($arg)) {
+                    $arg = Calculation::wrapResult(strtoupper($arg));
+                }
+
+                $testCondition = '=' . $arg . $condition;
+                if (!Calculation::getInstance()->_calculateFormulaValue($testCondition)) {
+                    $allConditionsAreMet = false;
+                    break;
+                }
+            }
+
+            if ($allConditionsAreMet && (($returnValue === null) || ($maxArg > $returnValue))) {
+                $returnValue = $maxArg;
+            }
+        }
+
+        return $returnValue;
+    }
+
+    /**
      * MEDIAN.
      *
      * Returns the median of the given numbers. The median is the number in the middle of a set of numbers.
