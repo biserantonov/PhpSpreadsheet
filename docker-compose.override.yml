@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  cli:
+    volumes:
+      - $SSH_AUTH_SOCK:/ssh-agent
+      - $HOME/.ssh/known_hosts:/home/appuser/.ssh/known_hosts
+      - /credissimo:/credissimo
+    environment:
+      - SSH_AUTH_SOCK=/ssh-agent

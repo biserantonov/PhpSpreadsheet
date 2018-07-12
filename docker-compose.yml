@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  cli:
+    build: docker/cli
+    restart: always
+    working_dir: /app
+    volumes:
+      - .:/app
+      - ./docker/cli/php.ini:/usr/local/etc/php/conf.d/100-custom.ini
+      - /composer
+    tty: true
+    stdin_open: true
+    command: '/bin/bash'
